@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MUTARTModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="MUTARTModelStoreContainer">
+    <EntitySet Name="TblEmployees" EntityType="MUTARTModel.Store.TblEmployees" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="TblEmployees">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="70" />
+    <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="70" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="15" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="WorkHours" Type="decimal" Nullable="false" />
+    <Property Name="WageType" Type="tinyint" Nullable="false" />
+    <Property Name="Wage" Type="int" Nullable="false" />
+    <Property Name="Department" Type="tinyint" Nullable="false" />
+  </EntityType>
+</Schema>

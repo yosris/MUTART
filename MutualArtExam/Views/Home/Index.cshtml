@@ -1,0 +1,213 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/app/app.js"></script>
+    <script src="~/Scripts/app/controllers/addEmployee.controller.js"></script>
+    <script src="~/Scripts/app/services/employee.service.js"></script>
+    <script src="~/Scripts/angular-messages.js"></script>
+    <script src="~/Scripts/app/controllers/employeeList.controller.js"></script>
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/general.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        MUTULART EXAM
+    </div>
+    <div ng-app="mutart" class="container">
+
+        <div>
+        <form name="empForm" ng-controller="AddEmployee as adEmp" novalidate>
+
+            <div class="row">
+                <div class="col-sm-8">
+                    FirstName: <input type="text" name="firstName" class="form-control" 
+                        ng-model="adEmp.employee.FirstName"
+                        ng-maxlength="10"
+                        required> 
+                </div>
+                <div class="col-sm-4 help-block" ng-messages="empForm.firstName.$error" ng-if="empForm.firstName.$touched">
+                    <p ng-message="maxlength">Your name is too long.</p>
+                    <p ng-message="required">Your name is required.</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-8">
+                LastName: <input type="text" name="lastName" class="form-control" 
+                        ng-model="adEmp.employee.LastName"
+                        ng-maxlength="10"
+                        required>
+                </div>
+                <div class="col-sm-4 help-block" ng-messages="empForm.firstName.$error" ng-if="empForm.firstName.$touched">
+                    <p ng-message="maxlength">Your last name is too long.</p>
+                    <p ng-message="required">Your last name is required.</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-sm-8">
+                     Phone: <input type="text" name="phone" class="form-control" 
+                        ng-model="adEmp.employee.Phone"
+                        ng-maxlength="15">
+                </div>
+                <div class="col-sm-4 help-block" ng-messages="empForm.firstName.$error" ng-if="empForm.firstName.$touched">
+                    <p ng-message="maxlength">Your name is too long.</p>
+                    <p ng-message="required">Your name is required.</p>
+                </div>
+            </div>
+           
+
+            <div class="row">
+                <div class="col-sm-8">
+                    Email: <input type="email" name="email" class="form-control" 
+                        ng-model="adEmp.employee.Email"
+                        ng-maxlength="50">
+                </div>
+                <div class="col-sm-4">
+                    <div class="help-block" ng-messages="empForm.email.$error">
+                        <div ng-messages-include="templates/validations.html"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-sm-8">
+                    WorkHours: <input type="number" name="workHours" class="form-control" 
+                        ng-model="adEmp.employee.WorkHours"
+                        required>
+                </div>
+                <div class="col-sm-4">
+                    <div class="help-block" ng-messages="empForm.workHours.$error" ng-if="empForm.workHours.$touched">
+                        <div ng-messages-include="templates/validations.html"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-sm-8">
+                    WageType:  <select name="wageType" ng-model="adEmp.employee.WageType">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                        </select>
+                </div>
+                <div class="col-sm-4">
+
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-sm-8">
+                     Wage: <input type="number" name="wage" class="form-control" 
+                        ng-model="adEmp.employee.Wage"
+                        required>
+                </div>
+                <div class="col-sm-4" ng-messages="empForm.wage.$error" ng-if="empForm.wage.$touched">
+                    <p ng-message="required">Your wage is required.</p>
+                </div>
+            </div>
+
+           <div class="row">
+               <div class="col-sm-8">
+                   Department: <input type="number" name="department" class="form-control" 
+                        ng-model="adEmp.employee.Department"
+                        required>
+               </div>
+               <div class="col-sm-4" ng-messages="empForm.department.$error" ng-if="empForm.department.$touched">
+               </div>
+           </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-danger" ng-disabled="empForm.$invalid" ng-click="adEmp.addEmployee()">Add</button>
+            </div>
+            
+
+        </form>
+        </div>
+
+        <div ng-controller="EmployeeList as employeesCtrl">
+            
+            <table>
+                <tr>
+                    <td>FirstName</td>
+                    <td>LastName</td>
+                    <td>Phone</td>
+                    <td>Email</td>
+                    <td>WorkHours</td>
+                    <td>WageType</td>
+                    <td>Wage</td>
+                    <td>Department</td>
+                    <td>Delete</td>
+                    <td>Edit</td>
+                    <td>
+                        <b>TOTAL WAGE</b>
+                    </td>
+                </tr>
+                <tr ng-repeat="emp in employeesCtrl.employeeList">
+                    <td>
+                        <span ng-show="!emp.updateMode">{{emp.FirstName}}</span>
+                        <input type="text" ng-show="emp.updateMode" ng-model="emp.FirstName"/>
+                    </td>
+                    <td>
+                        <span ng-show="!emp.updateMode">{{emp.LastName}}</span>
+                        <input type="text" ng-show="emp.updateMode" ng-model="emp.LastName"/>
+                    </td>
+                    <td>
+                        <span ng-show="!emp.updateMode">{{emp.Phone}}</span>
+                        <input type="text" ng-show="emp.updateMode" ng-model="emp.Phone"/>
+                    </td>
+                    <td>
+                        <span ng-show="!emp.updateMode">{{emp.Email}}</span>
+                        <input type="text" ng-show="emp.updateMode" ng-model="emp.Email"/>
+                    </td>
+                    <td>
+                        <span ng-show="!emp.updateMode">{{emp.WorkHours}}</span>
+                        <input type="text" ng-show="emp.updateMode" ng-model="emp.WorkHours"/>
+                    </td>
+                    <td>
+                        <span ng-show="!emp.updateMode">{{emp.WageType}}</span>
+                        <select ng-show="emp.updateMode" ng-model="emp.WageType">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                        </select>
+                    </td>
+                    <td>
+                        <span ng-show="!emp.updateMode">{{emp.Wage}}</span>
+                        <input type="text" ng-show="emp.updateMode" ng-model="emp.Wage"/>
+                    </td>
+                    <td>
+                        {{emp.Department}}
+                    </td>
+                    <td>
+                        <input type="button" value="X" ng-click="employeesCtrl.deleteEmployee(emp, $index)"/>
+                    </td>
+                    <td class="hand" ng-click="emp.updateMode = !emp.updateMode">
+                        <span ng-show="!emp.updateMode">
+                            edit
+                        </span>
+                        <span ng-show="emp.updateMode" ng-click="employeesCtrl.updateEmployee(emp)">
+                            update
+                        </span>
+                    </td>
+
+                    <td>
+                        <span ng-bind="employeesCtrl.calcTotalWage(emp)"></span>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</body>
+</html>
