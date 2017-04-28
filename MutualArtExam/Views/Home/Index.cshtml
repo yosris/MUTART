@@ -24,7 +24,7 @@
         MUTULART EXAM
     </div>
     <div ng-app="mutart" class="container">
-
+        @Html.ValidationSummary()
         <div>
         <form name="empForm" ng-controller="AddEmployee as adEmp" novalidate>
 
@@ -32,7 +32,7 @@
                 <div class="col-sm-8">
                     FirstName: <input type="text" name="firstName" class="form-control" 
                         ng-model="adEmp.employee.FirstName"
-                        ng-maxlength="10"
+                        ng-maxlength="75"
                         required> 
                 </div>
                 <div class="col-sm-4 help-block" ng-messages="empForm.firstName.$error" ng-if="empForm.firstName.$touched">
@@ -45,10 +45,10 @@
                 <div class="col-sm-8">
                 LastName: <input type="text" name="lastName" class="form-control" 
                         ng-model="adEmp.employee.LastName"
-                        ng-maxlength="10"
+                        ng-maxlength="70"
                         required>
                 </div>
-                <div class="col-sm-4 help-block" ng-messages="empForm.firstName.$error" ng-if="empForm.firstName.$touched">
+                <div class="col-sm-4 help-block" ng-messages="empForm.lastName.$error" ng-if="empForm.lastName.$touched">
                     <p ng-message="maxlength">Your last name is too long.</p>
                     <p ng-message="required">Your last name is required.</p>
                 </div>
@@ -60,7 +60,7 @@
                         ng-model="adEmp.employee.Phone"
                         ng-maxlength="15">
                 </div>
-                <div class="col-sm-4 help-block" ng-messages="empForm.firstName.$error" ng-if="empForm.firstName.$touched">
+                <div class="col-sm-4 help-block" ng-messages="empForm.phone.$error" ng-if="empForm.phone.$touched">
                     <p ng-message="maxlength">Your name is too long.</p>
                     <p ng-message="required">Your name is required.</p>
                 </div>
@@ -82,7 +82,7 @@
             
             <div class="row">
                 <div class="col-sm-8">
-                    WorkHours: <input type="number" name="workHours" class="form-control" 
+                    WorkHours: <input type="number" max="760" name="workHours" class="form-control" 
                         ng-model="adEmp.employee.WorkHours"
                         required>
                 </div>
@@ -95,20 +95,19 @@
             
             <div class="row">
                 <div class="col-sm-8">
-                    WageType:  <select name="wageType" ng-model="adEmp.employee.WageType">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
+                    WageType:  <select name="wageType" class="form-control" ng-model="adEmp.employee.WageType" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
                         </select>
                 </div>
                 <div class="col-sm-4">
-
                 </div>
             </div>
             
             <div class="row">
                 <div class="col-sm-8">
-                     Wage: <input type="number" name="wage" class="form-control" 
+                     Wage: <input type="number" max="80000" name="wage" class="form-control" 
                         ng-model="adEmp.employee.Wage"
                         required>
                 </div>
@@ -128,7 +127,7 @@
            </div>
 
             <div class="form-group">
-                <button type="submit" class="btn btn-danger" ng-disabled="empForm.$invalid" ng-click="adEmp.addEmployee()">Add</button>
+                <button type="submit" class="btn btn-danger" ng-disabled="empForm.$invalid" ng-click="adEmp.addEmployee(empForm)">Add</button>
             </div>
             
 
@@ -138,7 +137,7 @@
         <div ng-controller="EmployeeList as employeesCtrl">
             
             <table>
-                <tr>
+                <tr class="row">
                     <td>FirstName</td>
                     <td>LastName</td>
                     <td>Phone</td>
@@ -153,28 +152,28 @@
                         <b>TOTAL WAGE</b>
                     </td>
                 </tr>
-                <tr ng-repeat="emp in employeesCtrl.employeeList">
-                    <td>
+                <tr ng-repeat="emp in employeesCtrl.employeeList" class="row">
+                    <td class="col-sm-1">
                         <span ng-show="!emp.updateMode">{{emp.FirstName}}</span>
                         <input type="text" ng-show="emp.updateMode" ng-model="emp.FirstName"/>
                     </td>
-                    <td>
+                    <td class="col-sm-1">
                         <span ng-show="!emp.updateMode">{{emp.LastName}}</span>
                         <input type="text" ng-show="emp.updateMode" ng-model="emp.LastName"/>
                     </td>
-                    <td>
+                    <td class="col-sm-1">
                         <span ng-show="!emp.updateMode">{{emp.Phone}}</span>
                         <input type="text" ng-show="emp.updateMode" ng-model="emp.Phone"/>
                     </td>
-                    <td>
+                    <td class="col-sm-1">
                         <span ng-show="!emp.updateMode">{{emp.Email}}</span>
                         <input type="text" ng-show="emp.updateMode" ng-model="emp.Email"/>
                     </td>
-                    <td>
+                    <td class="col-sm-1">
                         <span ng-show="!emp.updateMode">{{emp.WorkHours}}</span>
                         <input type="text" ng-show="emp.updateMode" ng-model="emp.WorkHours"/>
                     </td>
-                    <td>
+                    <td class="col-sm-1">
                         <span ng-show="!emp.updateMode">{{emp.WageType}}</span>
                         <select ng-show="emp.updateMode" ng-model="emp.WageType">
                             <option>1</option>
@@ -182,17 +181,17 @@
                             <option>3</option>
                         </select>
                     </td>
-                    <td>
+                    <td class="col-sm-1">
                         <span ng-show="!emp.updateMode">{{emp.Wage}}</span>
                         <input type="text" ng-show="emp.updateMode" ng-model="emp.Wage"/>
                     </td>
-                    <td>
+                    <td class="col-sm-1">
                         {{emp.Department}}
                     </td>
-                    <td>
+                    <td class="col-sm-1">
                         <input type="button" value="X" ng-click="employeesCtrl.deleteEmployee(emp, $index)"/>
                     </td>
-                    <td class="hand" ng-click="emp.updateMode = !emp.updateMode">
+                    <td class="hand col-sm-1" ng-click="emp.updateMode = !emp.updateMode">
                         <span ng-show="!emp.updateMode">
                             edit
                         </span>
@@ -201,7 +200,7 @@
                         </span>
                     </td>
 
-                    <td>
+                    <td class="col-sm-1">
                         <span ng-bind="employeesCtrl.calcTotalWage(emp)"></span>
                     </td>
                 </tr>

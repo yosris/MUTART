@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using MutualArtExam.Models;
 
 namespace MutualArtExam.Controllers {
     public class EmployeeController : ApiController {
@@ -22,14 +23,19 @@ namespace MutualArtExam.Controllers {
         }
 
         // POST api/<controller>
-        public void Post(TblEmployees employee) {
+        public PostResult Post(TblEmployees employee) {
 
             // TODO: server validation
-
-            // Save employee to data base
-            dbContext.TblEmployees.Add(employee);
-            dbContext.SaveChanges();
-            
+            if (ModelState.IsValid)
+            {
+                // Save employee to data base
+                dbContext.TblEmployees.Add(employee);
+                dbContext.SaveChanges();
+            }
+            else {
+                return new PostResult() { State = ModelState };
+            }
+            return new PostResult() { ResultValue = employee.Id };
         }
 
 

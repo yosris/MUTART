@@ -22,12 +22,19 @@
 
         function addEmployee(employee) {
             $http.post('api/Employee', employee, {})
-            .then(function (data, status) {
-                console.log(data);
+            .then(function (result, status) {
+                var resultData = result.data;
+                console.log(resultData);
 
-                // TODO: get new id from database
-                employee.Id = 999;
-                employees.push(employee);
+                // data = new id from database
+                if (resultData.State) {
+                    return;
+                }
+                else if (resultData.ResultValue) {
+                    employee.Id = resultData.ResultValue;
+                    employees.push(employee);
+                }
+                
             });
         }
 

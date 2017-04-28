@@ -5,11 +5,29 @@
 
         self.employee = {};
 
+
         //
-        self.addEmployee = function () {
+        self.addEmployee = function (form) {
             //TODO: copy self.employee
 
-            employeeService.addEmployee(self.employee);
+            fixVals();
+
+            var copy = angular.copy(self.employee);
+            employeeService.addEmployee(copy);
+
+            // reset
+            reset(form);
         }
+
+        var fixVals = function () {
+            self.employee.WorkHours = self.employee.WorkHours.toFixed(2);
+        }
+
+        var reset = function (form) {
+            self.employee = {};
+            form.$setPristine();
+            form.$setUntouched();
+        }
+    
     }])
 }())
