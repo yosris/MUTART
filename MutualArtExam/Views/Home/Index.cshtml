@@ -18,7 +18,9 @@
     <script src="~/Scripts/bootstrap.min.js"></script>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/general.css" rel="stylesheet" />
+    <script src="~/Scripts/app/components/input/my-input.derictive.js"></script>
 </head>
+
 <body>
     <div>
         MUTULART EXAM
@@ -29,16 +31,7 @@
         <form name="empForm" ng-controller="AddEmployee as adEmp" novalidate>
 
             <div class="row">
-                <div class="col-sm-8">
-                    FirstName: <input type="text" name="firstName" class="form-control" 
-                        ng-model="adEmp.employee.FirstName"
-                        ng-maxlength="75"
-                        required> 
-                </div>
-                <div class="col-sm-4 help-block" ng-messages="empForm.firstName.$error" ng-if="empForm.firstName.$touched">
-                    <p ng-message="maxlength">Your name is too long.</p>
-                    <p ng-message="required">Your name is required.</p>
-                </div>
+                <my-input ng-model="adEmp.employee.FirstName" nmae="FirstName" title="FirstName" required maxLen="70"></my-input>
             </div>
 
             <div class="row">

@@ -10,13 +10,13 @@
         self.addEmployee = function (form) {
             //TODO: copy self.employee
 
-            fixVals();
+            //fixVals();
 
             var copy = angular.copy(self.employee);
             employeeService.addEmployee(copy);
 
             // reset
-            reset(form);
+            //reset(form);
         }
 
         var fixVals = function () {

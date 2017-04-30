@@ -7,7 +7,7 @@ using System.Web;
 namespace MutualArtExam {
     public class EmployeeMetadata {
 
-        [StringLength(3)]
+        [StringLength(70)]
         [Required(ErrorMessage = "The FirstName is required")]
         public string FirstName;
 

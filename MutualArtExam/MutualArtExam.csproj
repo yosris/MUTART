@@ -170,6 +170,8 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\app.js" />
+    <Content Include="Scripts\app\components\input\my-input.derictive.js" />
+    <Content Include="Scripts\app\components\input\my-input.html" />
     <Content Include="Scripts\app\controllers\addEmployee.controller.js" />
     <Content Include="Scripts\app\controllers\employeeList.controller.js" />
     <Content Include="Scripts\app\services\employee.service.js" />
